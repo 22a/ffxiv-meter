@@ -1,0 +1,18 @@
+<table {{on-overlay-event 'CombatData' this.onCombatDataEvent}}>
+  <thead>
+    <tr>
+      {{#each this.columns as |column|}}
+        <th>{{column.title}}</th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.combatantData as |combatant|}}
+      <tr>
+        {{#each this.columns as |column|}}
+          <th>{{get combatant column.title}}</th>
+        {{/each}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
