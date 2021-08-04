@@ -50,6 +50,7 @@ const toHumanReadable = (num) => {
 const enrichCombatant = (combatant, maxDamage, maxHealed, index) => {
   if (combatant.Job === '') combatant.Job = 'LB';
   const jobName = jobAcronymToJobName(combatant.Job);
+  combatant.isYou = combatant.name === 'YOU';
   combatant.jobName = jobName;
   combatant.jobNameNoSpace = jobName.replace(' ', '');
   combatant.jobIconFilepath = jobAcronymToIconFilepath(combatant.Job);
