@@ -20,7 +20,7 @@
         {{#if (eq column.value 'Job')}}
           <div class="flex flex-row items-center space-x-1 text-xs font-mono uppercase {{column.class}}">
             <span class="min-w-1 text-right">
-              {{combatant.rank}}
+              {{if (eq @focus 'hps') combatant.healedRank combatant.rank}}
             </span>
 
             <img class="w-6" alt="{{combatant.jobName}} Job Icon" src={{combatant.jobIconFilepath}}/>

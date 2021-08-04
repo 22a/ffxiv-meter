@@ -63,14 +63,14 @@ const enrichCombatant = (combatant, maxDamage, maxHealed, index) => {
     (combatant.damage / maxDamage) * 100
   );
   combatant.percentageOfMaxHealed = Math.floor(
-    (combatant.damage / maxHealed) * 100
+    (combatant.healed / maxHealed) * 100
   );
   return combatant;
 };
 
 export const enrichCombatants = (combatants) => {
-  const maxDamage = combatants[0] && combatants[0].damage;
-  const maxHealed = combatants[0] && combatants[0].healed;
+  const maxDamage = Math.max(...combatants.map((c) => c.damage), 0);
+  const maxHealed = Math.max(...combatants.map((c) => c.healed), 0);
   return combatants.map((combatant, i) =>
     enrichCombatant(combatant, maxDamage, maxHealed, i)
   );
