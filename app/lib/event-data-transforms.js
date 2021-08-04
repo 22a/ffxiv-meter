@@ -49,14 +49,14 @@ const toHumanReadable = (num) => {
 
 const enrichCombatant = (combatant, maxDamage, maxHealed, index) => {
   if (combatant.Job === '') combatant.Job = 'LB';
-  const jobName = jobAcronymToJobName(combatant.Job);
   combatant.isYou = combatant.name === 'YOU';
+  const jobName = jobAcronymToJobName(combatant.Job);
   combatant.jobName = jobName;
   combatant.jobNameNoSpace = jobName.replace(' ', '');
   combatant.jobIconFilepath = jobAcronymToIconFilepath(combatant.Job);
-  combatant.humanReadableDamage = toHumanReadable(combatant.damage);
+  combatant.humanReadableDamage = `(${toHumanReadable(combatant.damage)})`;
   combatant.humanReadableDps = toHumanReadable(combatant.DPS);
-  combatant.humanReadableHealed = toHumanReadable(combatant.healed);
+  combatant.humanReadableHealed = `(${toHumanReadable(combatant.healed)})`;
   combatant.humanReadableHps = toHumanReadable(combatant.ENCHPS);
   combatant.rank = index + 1;
   combatant.percentageOfMaxDamage = Math.floor(

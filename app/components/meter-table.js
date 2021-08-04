@@ -9,10 +9,17 @@ export default class MeterTableComponent extends Component {
   }
 
   columns = [
-    // { title: '', value: 'rank' },
-    { title: '', value: 'Job' },
-    { title: '', value: 'name' },
-    { title: 'dps', value: 'humanReadableDps', align: 'right' },
-    { title: '', value: 'humanReadableDamage', align: 'right' },
+    { title: '', value: 'Job', class: 'min-w-5 pl-1 pr-2 font-mono' },
+    { title: '', value: 'name', class: 'min-w-12 w-full whitespace-nowrap' },
+    {
+      title: 'dps',
+      value: 'humanReadableDps',
+      class: 'text-right min-w-4 pr-2 font-mono',
+    },
+    {
+      title: '',
+      value: 'humanReadableDamage',
+      class: 'text-right min-w-4 pr-1 font-mono text-sm opacity-80',
+    },
   ];
 }
