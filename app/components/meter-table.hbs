@@ -1,7 +1,4 @@
-<table
-   class="w-full"
-  {{on-overlay-event 'CombatData' this.onCombatDataEvent}}
->
+<table class="w-full">
   <thead>
     <tr>
       {{#each this.columns as |column|}}
@@ -14,12 +11,12 @@
     </tr>
   </thead>
   <tbody>
-    {{#each this.combatantData as |combatant|}}
+    {{#each this.combatants as |combatant|}}
       <tr class="text-white text-shadow font-bold {{if (eq combatant.name 'YOU') 'sticky-row'}}">
         <div class="absolute -z-2 w-full bg-black opacity-25  {{if (eq combatant.name 'YOU') 'opacity-75'}}" style="height: 26px;"></div>
         <div
           class="absolute -z-1 pl-20 content-box bg-{{get combatant 'jobNameNoSpace'}}"
-          style="height: 26px; width: {{get combatant 'percentageOfMaxDmg'}}%"
+          style="height: 26px; width: {{get combatant 'percentageOfMaxDamage'}}%"
         ></div>
         {{#each this.columns as |column|}}
           {{#if (eq column.value 'Job')}}

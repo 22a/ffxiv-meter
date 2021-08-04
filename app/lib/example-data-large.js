@@ -1,4 +1,4 @@
-export const combatantData = [
+export const combatants = [
   {
     n: '\n',
     t: '\t',
