@@ -1,180 +1,67 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import humanFormat from 'human-format';
+import {
+  combatantData as exampleCombatantData,
+  encounterData as exampleEncounterData,
+} from 'ffxiv-meter/lib/example-data-medium';
 
-let _combatantData = [
-  {
-    n: '\n',
-    t: '\t',
-    name: 'YOU',
-    duration: '00:09',
-    DURATION: '9',
-    damage: '2397',
-    'damage-m': '0.00',
-    'damage-b': '0.00',
-    'damage-*': '2.40K',
-    'DAMAGE-k': '2',
-    'DAMAGE-m': '0',
-    'DAMAGE-b': '0',
-    'DAMAGE-*': '2397',
-    'damage%': '100%',
-    dps: '266.33',
-    'dps-*': '266',
-    DPS: '266',
-    'DPS-k': '0',
-    'DPS-m': '0',
-    'DPS-*': '266',
-    encdps: '266.33',
-    'encdps-*': '266',
-    ENCDPS: '266',
-    'ENCDPS-k': '0',
-    'ENCDPS-m': '0',
-    'ENCDPS-*': '266',
-    hits: '7',
-    crithits: '0',
-    'crithit%': '0%',
-    crittypes: '-',
-    misses: '0',
-    hitfailed: '0',
-    swings: '7',
-    tohit: '100.00',
-    TOHIT: '100',
-    maxhit: 'Malefic II-587',
-    MAXHIT: '587',
-    'maxhit-*': 'Malefic II-587',
-    'MAXHIT-*': '587',
-    healed: '0',
-    'healed%': '--',
-    enchps: '0.00',
-    'enchps-*': '0',
-    ENCHPS: '0',
-    'ENCHPS-k': '0',
-    'ENCHPS-m': '0',
-    'ENCHPS-*': '0',
-    critheals: '0',
-    'critheal%': '0%',
-    heals: '0',
-    cures: '0',
-    maxheal: '',
-    MAXHEAL: '',
-    maxhealward: '',
-    MAXHEALWARD: '',
-    'maxheal-*': '',
-    'MAXHEAL-*': '',
-    'maxhealward-*': '',
-    'MAXHEALWARD-*': '',
-    damagetaken: '0',
-    'damagetaken-*': '0',
-    healstaken: '0',
-    'healstaken-*': '0',
-    powerdrain: '0',
-    'powerdrain-*': '0',
-    powerheal: '0',
-    'powerheal-*': '0',
-    kills: '0',
-    deaths: '0',
-    threatstr: '+(0)0/-(0)0',
-    threatdelta: '0',
-    Last10DPS: '186',
-    Last30DPS: '266',
-    Last60DPS: '266',
-    Job: 'Ast',
-    ParryPct: '0%',
-    BlockPct: '0%',
-    IncToHit: '---',
-    OverHealPct: '0%',
-    DirectHitPct: '0%',
-    DirectHitCount: '0',
-    CritDirectHitCount: '0',
-    CritDirectHitPct: '0%',
-    overHeal: '0',
-    damageShield: '0',
-    absorbHeal: '0',
-  },
-];
-let _encounterData = {
-  n: '\n',
-  t: '\t',
-  title: 'Striking Dummy',
-  duration: '00:09',
-  DURATION: '9',
-  damage: '2397',
-  'damage-m': '0.00',
-  'damage-*': '2.40K',
-  'DAMAGE-k': '2',
-  'DAMAGE-m': '0',
-  'DAMAGE-b': '0',
-  'DAMAGE-*': '2397',
-  dps: '266.33',
-  'dps-*': 'dps-*',
-  DPS: '266',
-  'DPS-k': '0',
-  'DPS-m': 'DPS-m',
-  'DPS-*': '266',
-  encdps: '266.33',
-  'encdps-*': '266',
-  ENCDPS: '266',
-  'ENCDPS-k': '0',
-  'ENCDPS-m': '0',
-  'ENCDPS-*': '266',
-  hits: '7',
-  crithits: '0',
-  'crithit%': '0%',
-  misses: '0',
-  hitfailed: '0',
-  swings: '7',
-  tohit: '100.00',
-  TOHIT: '100',
-  maxhit: 'YOU-Malefic II-587',
-  MAXHIT: 'YOU-587',
-  'maxhit-*': 'YOU-Malefic II-587',
-  'MAXHIT-*': 'YOU-587',
-  healed: '0',
-  enchps: '0.00',
-  'enchps-*': '0',
-  ENCHPS: '0',
-  'ENCHPS-k': '0',
-  'ENCHPS-m': '0',
-  'ENCHPS-*': '0',
-  heals: '0',
-  critheals: '0',
-  'critheal%': 'NaN',
-  cures: '0',
-  maxheal: '',
-  MAXHEAL: '',
-  maxhealward: '',
-  MAXHEALWARD: '',
-  'maxheal-*': '',
-  'MAXHEAL-*': '',
-  'maxhealward-*': '',
-  'MAXHEALWARD-*': '',
-  damagetaken: '0',
-  'damagetaken-*': '0',
-  healstaken: '0',
-  'healstaken-*': '0',
-  powerdrain: '0',
-  'powerdrain-*': '0',
-  powerheal: '0',
-  'powerheal-*': '0',
-  kills: '0',
-  deaths: '0',
-  CurrentZoneName: 'The Goblet',
-  Last10DPS: '266',
-  Last30DPS: '266',
-  Last60DPS: '266',
+const humanFormatConfig = {
+  decimals: 1,
+  separator: '',
+};
+
+let acronymToJobNameMapping = {
+  BRD: 'Bard',
+  DRG: 'Dragoon',
+  MNK: 'Monk',
+  PLD: 'Paladin',
+  WAR: 'Warrior',
+  BLM: 'Black Mage',
+  WHM: 'White Mage',
+  SCH: 'Scholar',
+  SMN: 'Summoner',
+  NIN: 'Ninja',
+  AST: 'Astrologian',
+  DRK: 'Dark Knight',
+  MCH: 'Machinist',
+  RDM: 'Red Mage',
+  SAM: 'Samurai',
+  BLU: 'Blue Mage',
+  GNB: 'Gunbreaker',
+  DNC: 'Dancer',
+};
+
+let acronymToIconFilepath = (jobNameAcronym) => {
+  let jobName = acronymToJobNameMapping[jobNameAcronym.toUpperCase()];
+  return `/images/job-icons/10/${jobName.replace(' ', '_')}_Icon_10.png`;
+};
+
+let enrichCombatantData = (combatantData) => {
+  return combatantData.map((data) => {
+    data.jobIconFilepath = acronymToIconFilepath(data.Job);
+    data.humanReadableDamage = humanFormat(
+      Number(data.damage),
+      humanFormatConfig
+    );
+    data.humanReadableDps = humanFormat(Number(data.DPS), humanFormatConfig);
+    console.log(data);
+    return data;
+  });
 };
 
 export default class MeterTableComponent extends Component {
   @tracked
-  combatantData = _combatantData;
+  combatantData = enrichCombatantData(exampleCombatantData);
   @tracked
-  encounterData = _encounterData;
+  encounterData = exampleEncounterData;
 
   columns = [
-    { title: 'job' },
-    { title: 'name' },
-    { title: 'dps' },
-    { title: 'damage' },
+    { title: '', value: 'Job' },
+    { title: '', value: 'name' },
+    { title: 'dps', value: 'humanReadableDps', align: 'right' },
+    { title: '', value: 'humanReadableDamage', align: 'right' },
   ];
 
   @action

@@ -1,16 +1,35 @@
-<table {{on-overlay-event 'CombatData' this.onCombatDataEvent}}>
+<table
+   class="w-full"
+  {{on-overlay-event 'CombatData' this.onCombatDataEvent}}
+>
   <thead>
     <tr>
       {{#each this.columns as |column|}}
-        <th>{{column.title}}</th>
+        <th class="pr-4 text-white text-shadow border-b
+          text-{{or column.align 'left'}}
+          {{if (eq column.value "Job") 'min-w-5'}}
+          {{if (eq column.value "name") 'w-full'}}
+        ">{{column.title}}</th>
       {{/each}}
     </tr>
   </thead>
   <tbody>
     {{#each this.combatantData as |combatant|}}
-      <tr>
+      <tr class="text-white text-shadow font-bold bg-{{get combatant 'Job'}}">
         {{#each this.columns as |column|}}
-          <th>{{get combatant column.title}}</th>
+          {{#if (eq column.value 'Job')}}
+            <td class="pr-4 flex flex-none flex-row items-center">
+              <img
+                class="w-6"
+                src={{combatant.jobIconFilepath}}
+              />
+              <span class="uppercase opacity-80 text-sm ml-px">
+                {{get combatant column.value}}
+              </span>
+            </td>
+          {{else}}
+          <td class="pr-4 text-{{or column.align 'left'}}">{{get combatant column.value}}</td>
+          {{/if}}
         {{/each}}
       </tr>
     {{/each}}
