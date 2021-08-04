@@ -9,7 +9,7 @@ export default class MeterTableComponent extends Component {
   }
 
   columns = [
-    { title: '', value: 'Job', class: 'min-w-5 pl-1 pr-2 font-mono' },
+    { title: '', value: 'Job', class: 'min-w-5 pr-2 font-mono' },
     { title: '', value: 'name', class: 'min-w-12 w-full whitespace-nowrap' },
     {
       title: 'dps',

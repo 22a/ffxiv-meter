@@ -11,12 +11,12 @@
     <div class="flex flex-row text-white text-shadow font-bold {{if combatant.isYou 'sticky bottom-0'}}">
       <div class="absolute -z-2 w-full bg-black opacity-25 h-6 {{if combatant.isYou 'opacity-75'}}"></div>
 
-      <div class="absolute -z-1 pl-20 h-6 content-box opacity-90 bg-{{combatant.jobNameNoSpace}}" style="width: {{combatant.percentageOfMaxDamage}}%"></div>
+      <div class="absolute -z-1 h-6 content-box opacity-90 bg-{{combatant.jobNameNoSpace}}" style="width: {{combatant.percentageOfMaxDamage}}%"></div>
 
       {{#each this.columns as |column|}}
         {{#if (eq column.value 'Job')}}
           <div class="flex flex-row items-center space-x-1 text-xs font-mono uppercase {{column.class}}">
-            <span class="">
+            <span class="min-w-1 text-right">
               {{combatant.rank}}
             </span>
 
