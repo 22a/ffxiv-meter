@@ -2024,6 +2024,11 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+approximate-number@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/approximate-number/-/approximate-number-2.1.0.tgz#8dbb27957f4f230e386b57258f8f0c75f32313c8"
+  integrity sha512-EioK6nto/hEnwaJ7d/TG1WOZ9o0zTyIFVP4Lk7zzR/3I4O7ivkBNo7EvLC2Xh2j2HD/cb9sUqXHdexfGXCXYDA==
+
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
@@ -7046,11 +7051,6 @@ https@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https/-/https-1.0.0.tgz#3c37c7ae1a8eeb966904a2ad1e975a194b7ed3a4"
   integrity sha1-PDfHrhqO65ZpBKKtHpdaGUt+06Q=
-
-human-format@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/human-format/-/human-format-0.11.0.tgz#bfc85a6e135f9a9292d641a38e979ed9f82557e9"
-  integrity sha512-g4UtoBnhfitCjkGjjiOlY8tkmArIcrstBa5adihxSJwSde1A7iQzvrNLB5ceX89FHXzYi9yTi04t3m82J/XIag==
 
 human-signals@^1.1.1:
   version "1.1.1"

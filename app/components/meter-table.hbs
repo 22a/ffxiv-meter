@@ -15,20 +15,28 @@
   </thead>
   <tbody>
     {{#each this.combatantData as |combatant|}}
-      <tr class="text-white text-shadow font-bold bg-{{get combatant 'Job'}}">
+      <tr class="text-white text-shadow font-bold {{if (eq combatant.name 'YOU') 'sticky-row'}}">
+        <div class="absolute -z-2 w-full bg-black opacity-25  {{if (eq combatant.name 'YOU') 'opacity-75'}}" style="height: 26px;"></div>
+        <div
+          class="absolute -z-1 pl-20 content-box bg-{{get combatant 'jobNameNoSpace'}}"
+          style="height: 26px; width: {{get combatant 'percentageOfMaxDmg'}}%"
+        ></div>
         {{#each this.columns as |column|}}
           {{#if (eq column.value 'Job')}}
-            <td class="pr-4 flex flex-none flex-row items-center">
+            <td class="pr-4 flex flex-none flex-row items-center space-x-1 text-xs font-mono uppercase">
+              <span class="opacity-80">
+                {{combatant.rank}}
+              </span>
               <img
                 class="w-6"
                 src={{combatant.jobIconFilepath}}
               />
-              <span class="uppercase opacity-80 text-sm ml-px">
-                {{get combatant column.value}}
+              <span class="uppercase opacity-80">
+                {{combatant.Job}}
               </span>
             </td>
           {{else}}
-          <td class="pr-4 text-{{or column.align 'left'}}">{{get combatant column.value}}</td>
+            <td class="pr-4 text-{{or column.align 'left'}} {{unless (eq column.value 'name') 'font-mono'}}">{{get combatant column.value}}</td>
           {{/if}}
         {{/each}}
       </tr>
