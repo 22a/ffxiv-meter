@@ -12,6 +12,9 @@ const purgeCSS = {
       './app/templates/**/*.hbs',
       './app/components/**/*.hbs',
     ],
+    safelist: {
+      greedy: [/^bg-/],
+    },
     defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
   },
 };
@@ -21,6 +24,9 @@ module.exports = function (defaults) {
     // Add options here
     'ember-cli-babel': {
       includePolyfill: true,
+    },
+    fingerprint: {
+      exclude: ['job-icons'],
     },
     postcssOptions: {
       compile: {
