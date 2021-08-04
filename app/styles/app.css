@@ -6,11 +6,10 @@
   .text-shadow {
     text-shadow: 1px 1px 2px black;
   }
+}
 
-  .sticky-row {
-    position: sticky;
-    inset-block-end: 0;
-  }
+*::-webkit-scrollbar {
+  display: none;
 }
 
 /* Transparency testing: */

@@ -1,5 +1,24 @@
 {{page-title "FFXIV Meter"}}
 
-<MeterTable/>
+<div class="flex flex-row">
+  <MeterTable
+    class="flex-1"
+    @focus='_hps'
+    @columns={{array
+      (hash title='' value='Job' class='min-w-5 pr-2 font-mono')
+      (hash title='' value='name' class='min-w-12 w-full whitespace-nowrap')
+      (hash title='hps' value='humanReadableHps' class='text-right min-w-4 pr-2 font-mono')
+      (hash title='' value='humanReadableHealed' class='text-right min-w-4 pr-1 font-mono text-sm opacity-80')
+    }}
+  />
 
-{{outlet}}
+  <MeterTable
+    class="flex-1"
+    @columns={{array
+      (hash title='' value='Job' class='min-w-5 pr-2 font-mono')
+      (hash title='' value='name' class='min-w-12 w-full whitespace-nowrap')
+      (hash title='dps' value='humanReadableDps' class='text-right min-w-4 pr-2 font-mono')
+      (hash title='' value='humanReadableDamage' class='text-right min-w-4 pr-1 font-mono text-sm opacity-80')
+    }}
+  />
+</div>
