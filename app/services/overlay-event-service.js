@@ -1,7 +1,7 @@
 import Service from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import exampleCombatData from 'ffxiv-meter/lib/example-payloads/alliance';
+import exampleCombatData from 'ffxiv-meter/lib/example-payloads/0';
 import { enrichCombatants } from 'ffxiv-meter/lib/event-data-transforms';
 
 export default class OverlayEventServiceService extends Service {
@@ -22,12 +22,24 @@ export default class OverlayEventServiceService extends Service {
   @tracked
   encounter = exampleCombatData.Encounter;
 
+  @tracked
+  encounterIsActive = exampleCombatData.isActive;
+
   @action
   onCombatDataEvent(combatDataEvent) {
-    console.log(combatDataEvent);
+    if (new URLSearchParams(window.location.search).get('logCombatData')) {
+      console.log(combatDataEvent);
+    }
     this.combatants = enrichCombatants(
       Object.values(combatDataEvent.Combatant)
     );
     this.encounter = combatDataEvent.Encounter;
+    this.encounterIsActive = combatDataEvent.isActive;
+  }
+
+  @action
+  clearCombatData() {
+    this.combatants = [];
+    this.encounter = {};
   }
 }

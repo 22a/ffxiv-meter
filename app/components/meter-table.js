@@ -23,6 +23,6 @@ export default class MeterTableComponent extends Component {
   }
 
   get encounterIsActive() {
-    return this.overlayEventService.isActive;
+    return this.overlayEventService.encounterIsActive;
   }
 }

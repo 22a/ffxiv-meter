@@ -1,7 +1,4 @@
 export function initialize(/* appInstance */) {
-  // console.log('Hello from the instance initializer!');
-  // document.body.appendChild(document.createTextNode('eggy beans'));
-
   // https://github.com/ngld/OverlayPlugin/blob/45d61da6ec12348c7c90247bf0b012078a7c8f71/docs/assets/shared/common.js
   (function () {
     let wsUrl = /[\?&]OVERLAY_WS=([^&]+)/.exec(location.href);

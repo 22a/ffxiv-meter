@@ -4,6 +4,14 @@
     {{this.encounter.title}}
   </div>
 {{/if}}
+{{#if @showClearEncounterButton}}
+  <button
+    class="absolute top-0 right-0 text-sm text-white text-outline text-mono rounded px-1 mr-1 bg-white"
+    {{on 'click' this.overlayEventService.clearCombatData}}
+  >
+    Clear
+  </button>
+{{/if}}
 <div class="flex flex-col h-full overflow-y-scroll font-black" ...attributes>
   <div class="flex flex-row">
     {{#each @columns as |column|}}
