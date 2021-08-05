@@ -1,7 +1,7 @@
 import Service from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import exampleCombatData from 'ffxiv-meter/lib/example-payloads/0';
+import exampleCombatData from 'ffxiv-meter/lib/example-payloads/1';
 import { enrichCombatants } from 'ffxiv-meter/lib/event-data-transforms';
 
 export default class OverlayEventServiceService extends Service {
