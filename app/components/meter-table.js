@@ -6,6 +6,7 @@ const sortCombatantsWithHealedFocus = (combatants) => {
     .filter((combatant) => Number(combatant.healed) > 0)
     .sort((c1, c2) => Number(c2.healed) - Number(c1.healed))
     .map((combatant, index) => {
+      // TODO: use hbs loop index instead of computing this manually
       combatant.healedRank = index + 1;
       return combatant;
     });
