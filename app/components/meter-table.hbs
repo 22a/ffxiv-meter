@@ -1,12 +1,12 @@
 {{#if @showEncounterOverview}}
-  <div class="absolute top-0 left-0 text-sm text-white text-outline text-mono rounded px-1 ml-2 bg-white  {{if this.encounterIsActive 'bg-opacity-100' 'bg-opacity-50'}}">
+  <div class="absolute top-0 left-0 text-sm text-white text-outline text-mono rounded pl-1 pt-px">
     [{{this.encounter.duration}}]
     {{this.encounter.title}}
   </div>
 {{/if}}
 {{#if @showClearEncounterButton}}
   <button
-    class="absolute top-0 right-0 text-sm text-white text-outline text-mono rounded px-1 mr-1 bg-white"
+    class="absolute top-0 right-0 text-sm text-white text-outline text-mono px-1 mt-px rounded hover:bg-white"
     {{on 'click' this.overlayEventService.clearCombatData}}
   >
     Clear
