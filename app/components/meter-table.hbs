@@ -1,15 +1,19 @@
-<div class="flex flex-col space-x-1 overflow-x-hidden" ...attributes>
+<div class="flex flex-col h-full overflow-y-scroll font-black" ...attributes>
   <div class="flex flex-row">
     {{#each @columns as |column|}}
-      <div class="text-white text-shadow {{column.class}}">
+      <div class="text-white text-outline {{column.class}}">
         {{column.title}}
       </div>
     {{/each}}
   </div>
 
-  {{#each this.combatants as |combatant|}}
-    <div class="flex flex-row min-w-0 text-white text-shadow font-bold relative {{if combatant.isYou 'sticky bottom-0'}}">
-      <div class="absolute -z-2 w-full bg-black opacity-25 h-6 static {{if combatant.isYou 'opacity-75'}}"></div>
+  {{#each this.combatants as |combatant index|}}
+    <div
+      class="flex flex-row min-w-0 text-white text-outline relative {{if combatant.isYou 'sticky bottom-0'}}"
+    >
+      <div
+        class="absolute -z-2 w-full bg-black opacity-25 h-6 static {{if combatant.isYou 'opacity-75'}}"
+      ></div>
 
       <div
         class="absolute -z-1 h-6 content-box opacity-90 bg-{{combatant.jobNameNoSpace}}"
@@ -18,15 +22,14 @@
 
       {{#each @columns as |column|}}
         {{#if (eq column.value 'Job')}}
-          <div class="flex flex-row items-center space-x-1 text-xs font-mono uppercase {{column.class}}">
+          <div class="flex flex-row items-center space-x-1 uppercase {{column.class}}">
             <span class="min-w-1 text-right">
-
-              {{if (eq @focus 'hps') combatant.healedRank combatant.rank}}
+              {{add index 1}}
             </span>
 
             <img class="w-6" alt="{{combatant.jobName}} Job Icon" src={{combatant.jobIconFilepath}}/>
 
-            <span class="uppercase opacity-80">
+            <span class="uppercase">
               {{combatant.Job}}
             </span>
           </div>

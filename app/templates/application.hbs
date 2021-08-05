@@ -1,24 +1,26 @@
 {{page-title "FFXIV Meter"}}
 
-<div class="flex flex-row">
-  <MeterTable
-    class="flex-1"
-    @focus='hps'
-    @columns={{array
-      (hash title='' value='Job' class='min-w-5 pr-2 font-mono')
-      (hash title='' value='name' class='flex-1 truncate')
-      (hash title='hps' value='humanReadableHps' class='text-right min-w-4 pr-2 font-mono')
-      (hash title='' value='humanReadableHealed' class='text-right min-w-4 pr-1 font-mono text-sm opacity-80')
-    }}
-  />
+<div class="flex flex-row h-full overflow-hidden space-x-1">
+  <div class="flex-1 h-full overflow-hidden">
+    <MeterTable
+      @focus='hps'
+      @columns={{array
+        (hash title='' value='Job' class='min-w-5 pr-2 font-mono text-sm')
+        (hash title='' value='name' class='flex-1 truncate font-sans')
+        (hash title='HPS' value='humanReadableHps' class='text-right min-w-4 pr-2 font-mono')
+        (hash title='' value='humanReadableHealed' class='text-right min-w-4 pr-1 font-mono text-sm')
+      }}
+    />
+  </div>
 
-  <MeterTable
-    class="flex-1"
-    @columns={{array
-      (hash title='' value='Job' class='min-w-5 pr-2 font-mono')
-      (hash title='' value='name' class='flex-1 truncate')
-      (hash title='dps' value='humanReadableDps' class='text-right min-w-4 pr-2 font-mono')
-      (hash title='' value='humanReadableDamage' class='text-right min-w-4 pr-1 font-mono text-sm opacity-80')
-    }}
-  />
+  <div class="flex-1 h-full overflow-hidden">
+    <MeterTable
+      @columns={{array
+        (hash title='' value='Job' class='min-w-5 pr-2 font-mono text-sm')
+        (hash title='' value='name' class='flex-1 truncate font-sans')
+        (hash title='DPS' value='humanReadableDps' class='text-right min-w-4 pr-2 font-mono')
+        (hash title='' value='humanReadableDamage' class='text-right min-w-4 pr-1 font-mono text-sm')
+      }}
+    />
+  </div>
 </div>

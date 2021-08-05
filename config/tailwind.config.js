@@ -2,6 +2,10 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      sans: ['Roboto', 'sans-serif'],
+      mono: ['"Roboto Mono"', 'monospace'],
+    },
     extend: {
       zIndex: {
         '-1': '-1',
