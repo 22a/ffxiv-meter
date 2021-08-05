@@ -3,13 +3,8 @@ import { inject as service } from '@ember/service';
 
 const sortCombatantsWithHealedFocus = (combatants) => {
   return combatants
-    .filter((combatant) => Number(combatant.healed) > 0)
-    .sort((c1, c2) => Number(c2.healed) - Number(c1.healed))
-    .map((combatant, index) => {
-      // TODO: use hbs loop index instead of computing this manually
-      combatant.healedRank = index + 1;
-      return combatant;
-    });
+    .filter((c) => Number(c.healed))
+    .sort((c1, c2) => Number(c2.healed) - Number(c1.healed));
 };
 
 export default class MeterTableComponent extends Component {
@@ -21,5 +16,13 @@ export default class MeterTableComponent extends Component {
     } else {
       return this.overlayEventService.combatants;
     }
+  }
+
+  get encounter() {
+    return this.overlayEventService.encounter;
+  }
+
+  get encounterIsActive() {
+    return this.overlayEventService.isActive;
   }
 }

@@ -58,7 +58,6 @@ const enrichCombatant = (combatant, maxDamage, maxHealed, index) => {
   combatant.humanReadableDps = toHumanReadable(combatant.DPS);
   combatant.humanReadableHealed = `(${toHumanReadable(combatant.healed)})`;
   combatant.humanReadableHps = toHumanReadable(combatant.ENCHPS);
-  combatant.rank = index + 1;
   combatant.percentageOfMaxDamage = Math.floor(
     (combatant.damage / maxDamage) * 100
   );

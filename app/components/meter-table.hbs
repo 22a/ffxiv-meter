@@ -1,3 +1,9 @@
+{{#if @showEncounterOverview}}
+  <div class="absolute top-0 left-0 text-sm text-white text-outline text-mono rounded px-1 ml-2 bg-white  {{if this.encounterIsActive 'bg-opacity-100' 'bg-opacity-50'}}">
+    [{{this.encounter.duration}}]
+    {{this.encounter.title}}
+  </div>
+{{/if}}
 <div class="flex flex-col h-full overflow-y-scroll font-black" ...attributes>
   <div class="flex flex-row">
     {{#each @columns as |column|}}

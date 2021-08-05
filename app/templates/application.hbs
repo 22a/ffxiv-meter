@@ -4,6 +4,7 @@
   <div class="flex-1 h-full overflow-hidden">
     <MeterTable
       @focus='hps'
+      @showEncounterOverview={{true}}
       @columns={{array
         (hash title='' value='Job' class='min-w-5 pr-2 font-mono text-sm')
         (hash title='' value='name' class='flex-1 truncate font-sans')
