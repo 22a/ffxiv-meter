@@ -43,13 +43,13 @@ const jobAcronymToIconFilepath = (jobAcronym) => {
 };
 
 const toHumanReadable = (num) => {
-  if (num === '∞') return '';
-  return approximateNumber(Number(num));
+  const parsedNum = Number(num);
+  if (isNaN(parsedNum)) return '';
+  return approximateNumber(parsedNum);
 };
 
-const enrichCombatant = (combatant, maxDamage, maxHealed, index) => {
+const enrichCombatant = (combatant, maxDamage, maxHealed) => {
   if (combatant.Job === '') combatant.Job = 'LB';
-  combatant.isYou = combatant.name === 'YOU';
   const jobName = jobAcronymToJobName(combatant.Job);
   combatant.jobName = jobName;
   combatant.jobNameNoSpace = jobName.replace(' ', '');
@@ -58,6 +58,7 @@ const enrichCombatant = (combatant, maxDamage, maxHealed, index) => {
   combatant.humanReadableDps = toHumanReadable(combatant.DPS);
   combatant.humanReadableHealed = `(${toHumanReadable(combatant.healed)})`;
   combatant.humanReadableHps = toHumanReadable(combatant.ENCHPS);
+  combatant.isYou = combatant.name === 'YOU';
   combatant.percentageOfMaxDamage = Math.floor(
     (combatant.damage / maxDamage) * 100
   );
@@ -70,7 +71,7 @@ const enrichCombatant = (combatant, maxDamage, maxHealed, index) => {
 export const enrichCombatants = (combatants) => {
   const maxDamage = Math.max(...combatants.map((c) => c.damage), 0);
   const maxHealed = Math.max(...combatants.map((c) => c.healed), 0);
-  return combatants.map((combatant, i) =>
-    enrichCombatant(combatant, maxDamage, maxHealed, i)
+  return combatants.map((combatant) =>
+    enrichCombatant(combatant, maxDamage, maxHealed)
   );
 };
