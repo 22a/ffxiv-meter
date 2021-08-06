@@ -3,19 +3,16 @@
 @import "tailwindcss/utilities";
 
 @layer utilities {
-  .text-outline {
+  .text-shadow {
     text-shadow: 1px 1px 2px black;
   }
-}
-
-*::-webkit-scrollbar {
-  display: none;
 }
 
 html, body {
   height: 100%;
   width: 100%;
-  overflow: hidden;
-  /* Transparency testing: */
-  /* background-image: url('https://i.redd.it/l6my81g5fr921.png'); */
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }

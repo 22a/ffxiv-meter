@@ -1,6 +1,6 @@
 {{#if (and @showEncounterOverview this.encounter.title)}}
   <div class="absolute top-0 left-0 flex flex-row items-center ml-1">
-    <div class="text-sm text-white text-outline text-mono mr-1">
+    <div class="text-sm text-white text-shadow text-mono mr-1">
       [{{this.encounter.duration}}]
       {{this.encounter.title}}
     </div>
@@ -24,7 +24,7 @@
   <div class="flex flex-col h-full overflow-y-scroll font-black" ...attributes>
     <div class="flex flex-row items-center">
       {{#each @columns as |column|}}
-        <div class="text-white text-outline {{column.class}}">
+        <div class="text-white text-shadow {{column.class}}">
           {{column.title}}
         </div>
       {{/each}}
@@ -32,7 +32,7 @@
 
     {{#each this.combatants as |combatant index|}}
       <div
-        class="flex flex-row min-w-0 text-white text-outline relative {{if combatant.isYou 'sticky bottom-0'}}"
+        class="flex flex-row min-w-0 text-white text-shadow relative {{if combatant.isYou 'sticky bottom-0'}}"
       >
         <div
           class="absolute -z-2 w-full h-6 bg-black {{if combatant.isYou 'opacity-75' 'opacity-25'}}"

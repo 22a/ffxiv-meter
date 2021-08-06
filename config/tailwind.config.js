@@ -10,6 +10,7 @@ module.exports = {
       zIndex: {
         '-1': '-1',
         '-2': '-2',
+        '-3': '-3',
       },
       colors: {
         // FF Logs job colours
@@ -51,14 +52,6 @@ module.exports = {
         6: '6rem',
         7: '7rem',
         8: '8rem',
-        9: '9rem',
-        10: '10rem',
-        11: '11rem',
-        12: '12rem',
-        13: '13rem',
-        14: '14rem',
-        15: '15rem',
-        16: '16rem',
       },
     },
   },

@@ -1,7 +1,13 @@
 {{page-title "FFXIV Meter"}}
 
-<div class="flex flex-row h-full overflow-hidden space-x-1">
-  <div class="flex-1 h-full overflow-hidden">
+<div class="flex flex-row h-full space-x-1">
+  {{!-- Transparency testing
+    <div
+      class="absolute w-full h-full -z-3"
+      style="background-image: url('https://i.redd.it/l6my81g5fr921.png');"
+    ></div>
+  --}}
+  <div class="flex-1 h-full">
     <MeterTable
       @focus='hps'
       @showEncounterOverview={{true}}
