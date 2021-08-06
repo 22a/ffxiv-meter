@@ -1,58 +1,70 @@
-{{#if @showEncounterOverview}}
-  <div class="absolute top-0 left-0 text-sm text-white text-outline text-mono rounded pl-1 pt-px">
-    [{{this.encounter.duration}}]
-    {{this.encounter.title}}
+{{#if (and @showEncounterOverview this.encounter.title)}}
+  <div class="absolute top-0 left-0 flex flex-row items-center ml-1">
+    <div class="text-sm text-white text-outline text-mono mr-1">
+      [{{this.encounter.duration}}]
+      {{this.encounter.title}}
+    </div>
+
+    <button
+      class="text-white h-6 rounded hover:bg-green-500 outline-none px-1"
+      {{on 'click' this.overlayEventService.logCombatData}}
+    >
+      {{! https://heroicons.com/ }}
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6" /></svg>
+    </button>
+
+    <button
+      class="text-white h-6 rounded hover:bg-red-500 outline-none px-1"
+      {{on 'click' this.overlayEventService.clearCombatData}}
+    >
+      {{! https://heroicons.com/ }}
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    </button>
   </div>
 {{/if}}
-{{#if @showClearEncounterButton}}
-  <button
-    class="absolute top-0 right-0 text-sm text-white text-outline text-mono px-1 mt-px rounded hover:bg-white"
-    {{on 'click' this.overlayEventService.clearCombatData}}
-  >
-    Clear
-  </button>
-{{/if}}
-<div class="flex flex-col h-full overflow-y-scroll font-black" ...attributes>
-  <div class="flex flex-row">
-    {{#each @columns as |column|}}
-      <div class="text-white text-outline {{column.class}}">
-        {{column.title}}
+{{#if (not (is-empty this.combatants))}}
+  <div class="flex flex-col h-full overflow-y-scroll font-black" ...attributes>
+    <div class="flex flex-row items-center">
+      {{#each @columns as |column|}}
+        <div class="text-white text-outline {{column.class}}">
+          {{column.title}}
+        </div>
+      {{/each}}
+    </div>
+
+    {{#each this.combatants as |combatant index|}}
+      <div
+        class="flex flex-row min-w-0 text-white text-outline relative {{if combatant.isYou 'sticky bottom-0'}}"
+      >
+        <div
+          class="absolute -z-2 w-full bg-black opacity-25 h-6 static {{if combatant.isYou 'opacity-75'}}"
+        ></div>
+
+        <div
+          class="absolute -z-1 h-6 content-box opacity-90 bg-{{combatant.jobNameNoSpace}}"
+          style="width: {{if (eq @focus 'hps') combatant.percentageOfMaxHealed combatant.percentageOfMaxDamage}}%"
+        ></div>
+
+        {{#each @columns as |column|}}
+          {{#if (eq column.value 'Job')}}
+            <div class="flex flex-row items-center space-x-1 uppercase {{column.class}}">
+              <span class="min-w-1 text-right">
+                {{add index 1}}
+              </span>
+
+              <img class="w-6" alt="{{combatant.jobName}} Job Icon" src={{combatant.jobIconFilepath}}/>
+
+              <span class="uppercase">
+                {{combatant.Job}}
+              </span>
+            </div>
+          {{else}}
+            <div class="{{column.class}}">
+              {{get combatant column.value}}
+            </div>
+          {{/if}}
+        {{/each}}
       </div>
     {{/each}}
   </div>
-
-  {{#each this.combatants as |combatant index|}}
-    <div
-      class="flex flex-row min-w-0 text-white text-outline relative {{if combatant.isYou 'sticky bottom-0'}}"
-    >
-      <div
-        class="absolute -z-2 w-full bg-black opacity-25 h-6 static {{if combatant.isYou 'opacity-75'}}"
-      ></div>
-
-      <div
-        class="absolute -z-1 h-6 content-box opacity-90 bg-{{combatant.jobNameNoSpace}}"
-        style="width: {{if (eq @focus 'hps') combatant.percentageOfMaxHealed combatant.percentageOfMaxDamage}}%"
-      ></div>
-
-      {{#each @columns as |column|}}
-        {{#if (eq column.value 'Job')}}
-          <div class="flex flex-row items-center space-x-1 uppercase {{column.class}}">
-            <span class="min-w-1 text-right">
-              {{add index 1}}
-            </span>
-
-            <img class="w-6" alt="{{combatant.jobName}} Job Icon" src={{combatant.jobIconFilepath}}/>
-
-            <span class="uppercase">
-              {{combatant.Job}}
-            </span>
-          </div>
-        {{else}}
-          <div class="{{column.class}}">
-            {{get combatant column.value}}
-          </div>
-        {{/if}}
-      {{/each}}
-    </div>
-  {{/each}}
-</div>
+{{/if}}

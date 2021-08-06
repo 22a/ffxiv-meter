@@ -17,6 +17,9 @@ export default class OverlayEventServiceService extends Service {
   }
 
   @tracked
+  rawCombatData = exampleCombatData;
+
+  @tracked
   combatants = enrichCombatants(Object.values(exampleCombatData.Combatant));
 
   @tracked
@@ -27,14 +30,17 @@ export default class OverlayEventServiceService extends Service {
 
   @action
   onCombatDataEvent(combatDataEvent) {
-    if (new URLSearchParams(window.location.search).get('logCombatData')) {
-      console.log(combatDataEvent);
-    }
+    this.rawCombatData = combatDataEvent;
+    this.encounter = combatDataEvent.Encounter;
+    this.encounterIsActive = combatDataEvent.isActive;
     this.combatants = enrichCombatants(
       Object.values(combatDataEvent.Combatant)
     );
-    this.encounter = combatDataEvent.Encounter;
-    this.encounterIsActive = combatDataEvent.isActive;
+  }
+
+  @action
+  logCombatData() {
+    console.log(this.rawCombatData);
   }
 
   @action
