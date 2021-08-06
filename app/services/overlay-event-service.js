@@ -4,11 +4,21 @@ import { tracked } from '@glimmer/tracking';
 import exampleCombatData from 'ffxiv-meter/lib/example-payloads/1';
 import { enrichCombatants } from 'ffxiv-meter/lib/event-data-transforms';
 
+const LOAD_EXAMPLE_DATA = true;
+
 export default class OverlayEventServiceService extends Service {
   constructor() {
     super();
     window.addOverlayListener('CombatData', this.onCombatDataEvent);
     window.startOverlayEvents();
+    if (LOAD_EXAMPLE_DATA) {
+      this.rawCombatData = exampleCombatData;
+      this.combatants = enrichCombatants(
+        Object.values(exampleCombatData.Combatant)
+      );
+      this.encounter = exampleCombatData.Encounter;
+      this.encounterIsActive = exampleCombatData.isActive;
+    }
   }
 
   willDestroy() {
@@ -17,25 +27,25 @@ export default class OverlayEventServiceService extends Service {
   }
 
   @tracked
-  rawCombatData = exampleCombatData;
+  rawCombatData = {};
 
   @tracked
-  combatants = enrichCombatants(Object.values(exampleCombatData.Combatant));
+  combatants = [];
 
   @tracked
-  encounter = exampleCombatData.Encounter;
+  encounter = {};
 
   @tracked
-  encounterIsActive = exampleCombatData.isActive;
+  encounterIsActive = false;
 
   @action
   onCombatDataEvent(combatDataEvent) {
     this.rawCombatData = combatDataEvent;
-    this.encounter = combatDataEvent.Encounter;
-    this.encounterIsActive = combatDataEvent.isActive;
     this.combatants = enrichCombatants(
       Object.values(combatDataEvent.Combatant)
     );
+    this.encounter = combatDataEvent.Encounter;
+    this.encounterIsActive = combatDataEvent.isActive;
   }
 
   @action
@@ -45,7 +55,9 @@ export default class OverlayEventServiceService extends Service {
 
   @action
   clearCombatData() {
+    this.rawCombatData = {};
     this.combatants = [];
     this.encounter = {};
+    this.encounterIsActive = false;
   }
 }
