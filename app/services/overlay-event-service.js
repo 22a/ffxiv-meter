@@ -1,7 +1,7 @@
 import Service from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import exampleCombatData from 'ffxiv-meter/lib/example-payloads/alliance';
+import exampleCombatData from 'ffxiv-meter/lib/example-combat-data';
 import { enrichCombatants } from 'ffxiv-meter/lib/event-data-transforms';
 
 const LOAD_EXAMPLE_DATA = true;
