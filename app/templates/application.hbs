@@ -7,12 +7,13 @@
       style="background-image: url('https://i.redd.it/l6my81g5fr921.png');"
     ></div>
   --}}
-  <div class="flex-1 h-full">
+
+  <div class="flex-1 h-full overflow-hidden">
     <MeterTable
       @focus='hps'
       @showEncounterOverview={{true}}
       @columns={{array
-        (hash title='' value='Job' class='min-w-5 pr-2 font-mono text-sm')
+        (hash title='' value='Job' class='')
         (hash title='' value='name' class='flex-1 truncate font-sans')
         (hash title='HPS' value='humanReadableHps' class='text-right min-w-4 pr-2 font-mono')
         (hash title='' value='humanReadableHealed' class='text-right min-w-4 pr-1 font-mono text-sm')
@@ -23,7 +24,7 @@
   <div class="flex-1 h-full overflow-hidden">
     <MeterTable
       @columns={{array
-        (hash title='' value='Job' class='min-w-5 pr-2 font-mono text-sm')
+        (hash title='' value='Job' class='')
         (hash title='' value='name' class='flex-1 truncate font-sans')
         (hash title='DPS' value='humanReadableDps' class='text-right min-w-4 pr-2 font-mono')
         (hash title='' value='humanReadableDamage' class='text-right min-w-4 pr-1 font-mono text-sm')

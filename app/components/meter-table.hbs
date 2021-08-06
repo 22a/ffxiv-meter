@@ -1,7 +1,15 @@
 {{#if (and @showEncounterOverview this.encounter.title)}}
   <div class="absolute top-0 left-0 flex flex-row items-center ml-1">
-    <div class="text-sm text-white text-shadow text-mono mr-1">
-      [{{this.encounter.duration}}]
+    <div class="flex flex-row items-center text-sm text-white text-shadow text-mono mr-1">
+      <div class="w-4 flex items-center">
+        {{#if this.encounterIsActive}}
+          <span class="flex h-2 w-2 ml-1">
+            <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+          </span>
+        {{/if}}
+      </div>
+      ({{this.encounter.duration}})
       {{this.encounter.title}}
     </div>
 
@@ -21,7 +29,7 @@
   </div>
 {{/if}}
 {{#if (not (is-empty this.combatants))}}
-  <div class="flex flex-col h-full overflow-y-scroll font-black" ...attributes>
+  <div class="flex flex-col h-full overflow-y-scroll font-bold" ...attributes>
     <div class="flex flex-row items-center">
       {{#each @columns as |column|}}
         <div class="text-white text-shadow {{column.class}}">
@@ -35,29 +43,29 @@
         class="flex flex-row min-w-0 text-white text-shadow relative {{if combatant.isYou 'sticky bottom-0'}}"
       >
         <div
-          class="absolute -z-2 w-full h-6 bg-black {{if combatant.isYou 'opacity-75' 'opacity-25'}}"
+          class="absolute -z-2 w-full h-6 bg-black {{unless combatant.isYou 'opacity-25'}}"
         ></div>
 
         <div
-          class="absolute -z-1 h-6 opacity-90 bg-job-{{combatant.jobNameNoSpace}}"
+          class="absolute -z-1 h-6 {{unless combatant.isYou 'opacity-90'}} bg-job-{{combatant.jobNameNoSpace}}"
           style="width: {{if (eq @focus 'hps') combatant.percentageOfMaxHealed combatant.percentageOfMaxDamage}}%"
         ></div>
 
         {{#each @columns as |column|}}
           {{#if (eq column.value 'Job')}}
-            <div class="flex flex-row items-center space-x-1 uppercase {{column.class}}">
-              <span class="min-w-1 text-right">
+            <div class="flex flex-row items-center space-x-1 min-w-5 pr-2 font-mono uppercase {{column.class}}">
+              <span class="min-w-2 -ml-3 text-right text-sm">
                 {{add index 1}}
               </span>
 
               <img class="w-6" alt="{{combatant.jobName}} Job Icon" src={{combatant.jobIconFilepath}}/>
 
-              <span class="uppercase">
+              <span class="uppercase text-xs">
                 {{combatant.Job}}
               </span>
             </div>
           {{else}}
-            <div class="{{column.class}}">
+            <div class="self-center {{column.class}}">
               {{get combatant column.value}}
             </div>
           {{/if}}

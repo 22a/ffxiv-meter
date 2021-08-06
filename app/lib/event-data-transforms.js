@@ -54,9 +54,9 @@ const enrichCombatant = (combatant, maxDamage, maxHealed) => {
   combatant.jobName = jobName;
   combatant.jobNameNoSpace = jobName.replace(' ', '');
   combatant.jobIconFilepath = jobAcronymToIconFilepath(combatant.Job);
-  combatant.humanReadableDamage = `(${toHumanReadable(combatant.damage)})`;
+  combatant.humanReadableDamage = `[${toHumanReadable(combatant.damage)}]`;
   combatant.humanReadableDps = toHumanReadable(combatant.DPS);
-  combatant.humanReadableHealed = `(${toHumanReadable(combatant.healed)})`;
+  combatant.humanReadableHealed = `[${toHumanReadable(combatant.healed)}]`;
   combatant.humanReadableHps = toHumanReadable(combatant.ENCHPS);
   combatant.isYou = combatant.name === 'YOU';
   combatant.percentageOfMaxDamage = Math.floor(
