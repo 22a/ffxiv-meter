@@ -4,7 +4,10 @@ import { tracked } from '@glimmer/tracking';
 import exampleCombatData from 'ffxiv-meter/lib/example-combat-data';
 import { enrichCombatants } from 'ffxiv-meter/lib/event-data-transforms';
 
-const LOAD_EXAMPLE_DATA = true;
+const LOAD_EXAMPLE_DATA = Boolean(
+  // https://ffxiv-meter.netlify.app/?loadExampleCombatData=true
+  new URLSearchParams(window.location.search).get('loadExampleCombatData')
+);
 
 export default class OverlayEventServiceService extends Service {
   constructor() {
