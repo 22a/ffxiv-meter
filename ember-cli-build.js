@@ -21,10 +21,9 @@ const purgeCSS = {
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
-    // Add options here
-    'ember-cli-babel': {
-      includePolyfill: true,
-    },
+    // 'ember-cli-babel': {
+    //   includePolyfill: true,
+    // },
     fingerprint: {
       exclude: ['job-icons'],
     },
