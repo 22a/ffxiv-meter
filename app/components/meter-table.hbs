@@ -1,30 +1,24 @@
 {{#if (and @showEncounterOverview this.encounter.title)}}
   <div class="absolute top-0 left-0 flex flex-row items-center ml-1">
     <div class="flex flex-row items-center text-sm text-white text-shadow text-mono mr-1">
-      <div class="w-4 flex items-center">
-        {{#if this.encounterIsActive}}
-          <span class="flex h-2 w-2 ml-1">
-            <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-white opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-          </span>
-        {{/if}}
-      </div>
       ({{this.encounter.duration}})
       {{this.encounter.title}}
     </div>
 
     <button
-      class="text-white h-6 rounded hover:bg-green-500 outline-none px-1"
-      {{on 'click' this.overlayEventService.logCombatData}}
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6"/></svg>
-    </button>
-
-    <button
       class="text-white h-6 rounded hover:bg-red-500 outline-none px-1"
+      title="Clear Encounter"
       {{on 'click' this.overlayEventService.clearCombatData}}
     >
       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+
+    <button
+      class="text-white h-6 rounded opacity-0 hover:opacity-100 hover:bg-green-500 outline-none px-1"
+      title="Log combat data event to OverlayPlugin console"
+      {{on 'click' this.overlayEventService.logCombatData}}
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6"/></svg>
     </button>
   </div>
 {{/if}}
