@@ -8,6 +8,7 @@
     <button
       class="text-white h-6 rounded hover:bg-red-500 outline-none px-1"
       title="Clear Encounter"
+      type="button"
       {{on 'click' this.overlayEventService.clearCombatData}}
     >
       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -16,12 +17,14 @@
     <button
       class="text-white h-6 rounded opacity-0 hover:opacity-100 hover:bg-green-500 outline-none px-1"
       title="Log combat data event to OverlayPlugin console"
+      type="button"
       {{on 'click' this.overlayEventService.logCombatData}}
     >
       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6"/></svg>
     </button>
   </div>
 {{/if}}
+
 {{#if (not (is-empty this.combatants))}}
   <div class="flex flex-col h-full overflow-y-scroll font-bold" ...attributes>
     <div class="flex flex-row items-center">
@@ -34,7 +37,7 @@
 
     {{#each this.combatants as |combatant index|}}
       <div
-        class="flex flex-row min-w-0 text-white text-shadow relative {{if combatant.isYou 'sticky bottom-0'}}"
+        class="flex flex-row items-center min-w-0 text-white text-shadow relative {{if combatant.isYou 'sticky bottom-0'}}"
       >
         <div
           class="absolute -z-2 w-full h-6 bg-black {{unless combatant.isYou 'opacity-25'}}"
@@ -48,18 +51,18 @@
         {{#each @columns as |column|}}
           {{#if (eq column.value 'Job')}}
             <div class="flex flex-row items-center space-x-1 min-w-5 pr-2 uppercase {{column.class}}">
-              <span class="min-w-2 -ml-3 text-right text-sm">
+              <div class="min-w-2 -ml-3 text-right text-sm">
                 {{add index 1}}
-              </span>
+              </div>
 
-              <img class="w-6" alt="{{combatant.jobName}} Job Icon" src={{combatant.jobIconFilepath}}/>
+              <img class="w-6" alt="{{combatant.jobName}} Job Icon" src="{{combatant.jobIconFilepath}}"/>
 
-              <span class="uppercase text-xs">
+              <div class="uppercase text-xs">
                 {{combatant.Job}}
-              </span>
+              </div>
             </div>
           {{else}}
-            <div class="self-center {{column.class}}">
+            <div class="{{column.class}}">
               {{get combatant column.value}}
             </div>
           {{/if}}
