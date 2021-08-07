@@ -1,6 +1,6 @@
 {{#if (and @showEncounterOverview this.encounter.title)}}
   <div class="absolute top-0 left-0 flex flex-row items-center ml-1">
-    <div class="flex flex-row items-center text-sm text-white text-shadow text-mono mr-1">
+    <div class="flex flex-row items-center text-sm text-white text-shadow mr-1">
       ({{this.encounter.duration}})
       {{this.encounter.title}}
     </div>
@@ -47,7 +47,7 @@
 
         {{#each @columns as |column|}}
           {{#if (eq column.value 'Job')}}
-            <div class="flex flex-row items-center space-x-1 min-w-5 pr-2 font-mono uppercase {{column.class}}">
+            <div class="flex flex-row items-center space-x-1 min-w-5 pr-2 uppercase {{column.class}}">
               <span class="min-w-2 -ml-3 text-right text-sm">
                 {{add index 1}}
               </span>

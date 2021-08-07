@@ -2,16 +2,7 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    fontFamily: {
-      sans: ['Roboto', 'sans-serif'],
-      mono: ['"Roboto Mono"', 'monospace'],
-    },
     extend: {
-      zIndex: {
-        '-1': '-1',
-        '-2': '-2',
-        '-3': '-3',
-      },
       colors: {
         // FF Logs job colours
         'job-LimitBreak': '#2599be',
@@ -52,6 +43,11 @@ module.exports = {
         6: '6rem',
         7: '7rem',
         8: '8rem',
+      },
+      zIndex: {
+        '-1': '-1',
+        '-2': '-2',
+        '-3': '-3',
       },
     },
   },
