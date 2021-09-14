@@ -14,14 +14,16 @@
       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
     </button>
 
-    <button
-      class="text-white h-6 rounded opacity-0 hover:opacity-100 hover:bg-green-500 outline-none px-1"
-      title="Log combat data event to OverlayPlugin console"
-      type="button"
-      {{on 'click' this.overlayEventService.logCombatData}}
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6"/></svg>
-    </button>
+    {{#if @shotLogButton}}
+      <button
+        class="text-white h-6 rounded opacity-0 hover:opacity-100 hover:bg-green-500 outline-none px-1"
+        title="Log combat data event to OverlayPlugin console"
+        type="button"
+        {{on 'click' this.overlayEventService.logCombatData}}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6"/></svg>
+      </button>
+    {{/if}}
   </div>
 {{/if}}
 

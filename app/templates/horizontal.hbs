@@ -1,0 +1,29 @@
+<div class="flex flex-row h-full space-x-1 font-mono">
+  {{!-- Transparency testing
+    <div class="absolute w-full h-full -z-3 bg-blue-500"></div>
+  --}}
+
+  <div class="flex-1 h-full overflow-hidden">
+    <MeterTable
+      @focus='hps'
+      @showEncounterOverview={{true}}
+      @columns={{array
+        (hash title='' value='Job' class='')
+        (hash title='' value='name' class='flex-1 truncate')
+        (hash title='HPS' value='humanReadableHps' class='text-right min-w-4 pr-2')
+        (hash title='' value='humanReadableHealed' class='text-right min-w-4 pr-1 text-sm')
+      }}
+    />
+  </div>
+
+  <div class="flex-1 h-full overflow-hidden">
+    <MeterTable
+      @columns={{array
+        (hash title='' value='Job' class='')
+        (hash title='' value='name' class='flex-1 truncate')
+        (hash title='DPS' value='humanReadableDps' class='text-right min-w-4 pr-2')
+        (hash title='' value='humanReadableDamage' class='text-right min-w-4 pr-1 text-sm')
+      }}
+    />
+  </div>
+</div>
