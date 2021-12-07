@@ -51,7 +51,9 @@ const toHumanReadable = (num) => {
 };
 
 const enrichCombatant = (combatant, maxDamage, maxHealed) => {
-  if (combatant.Job === '') combatant.Job = 'LB';
+  if (combatant.Job === '' || combatant.Job.includes('Limit')) {
+    combatant.Job = 'LB';
+  }
   const jobName = jobAcronymToJobName(combatant.Job);
   combatant.jobName = jobName;
   combatant.jobNameNoSpace = jobName.replace(' ', '');
