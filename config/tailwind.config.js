@@ -7,7 +7,9 @@ module.exports = {
         // FF Logs job colours
         'job-LimitBreak': '#2599be',
         'job-Scholar': '#8657ff',
+        'job-Sage': '#80a0f0',
         'job-Astrologian': '#ffe74a',
+        'job-Reaper': '#965a90',
         'job-Monk': '#d69c00',
         'job-Pugilist': '#d69c00',
         'job-Ninja': '#af1964',

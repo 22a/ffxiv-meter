@@ -25,7 +25,9 @@ const jobAcronymToJobNameMapping = {
   DRK: 'Dark Knight',
   MCH: 'Machinist',
   RDM: 'Red Mage',
+  RPR: 'Reaper',
   SAM: 'Samurai',
+  SGE: 'Sage',
   BLU: 'Blue Mage',
   GNB: 'Gunbreaker',
   DNC: 'Dancer',
@@ -34,7 +36,7 @@ const jobAcronymToJobNameMapping = {
 };
 
 const jobAcronymToJobName = (jobAcronym) => {
-  return jobAcronymToJobNameMapping[jobAcronym.toUpperCase()];
+  return jobAcronymToJobNameMapping[jobAcronym.toUpperCase()] || 'Unknown';
 };
 
 const jobAcronymToIconFilepath = (jobAcronym) => {
